@@ -1,6 +1,6 @@
 import datetime
-import os
 from typing import *
+from prettytable import PrettyTable
 
 class InvalidInputError(Exception):
     """Exception which happens when the user provides Invalid Input"""
@@ -81,35 +81,34 @@ class TaskList:
     def __str__(self):
         ct = self.start_time
 
-        out_str = ""
-        out_str += "_____________________________\n"
+        t = PrettyTable(["Task", "Start Time", "End Time"])
+        
         for task in self._internal_list:
             td = datetime.timedelta(minutes = task.duration)
-            out_str += f"{task.name} | {ct.strftime('%H:%M')} | {(td+ct).strftime('%H:%M')}\n"
+            t.add_row([task.name, ct.strftime('%H:%M'), (td+ct).strftime('%H:%M')])
             ct += td
-        out_str+="‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾"
-
-        return out_str
+        
+        return str(t)
 
 def main():
     tl = TaskList()
     tl.append("Task 1", 60)
-    print(str(tl))
+    print(tl)
     input()
     tl.insert("Task 2", 60, 0)
-    print(str(tl))
+    print(tl)
     input()
     tl.insert_splice("Task 3", 60, 1)
-    print(str(tl))
+    print(tl)
     input()
     tl.append("Task 4", 60)
-    print(str(tl))
+    print(tl)
     input()
     tl.remove(4)
-    print(str(tl))
+    print(tl)
     input()
     tl.replace("New Task 2", 60, 1)
-    print(str(tl))
+    print(tl)
     input()
 if __name__ == "__main__":
     main()
