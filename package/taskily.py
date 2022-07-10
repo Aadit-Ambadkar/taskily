@@ -59,6 +59,19 @@ class TaskList:
         self._insert_splice(Task(name, duration), time, idx=idx)
     # END insert_splice
 
+    # BEGIN remove
+    def remove(self, idx: int = 0):
+        self._internal_list.pop(idx)
+    # END remove
+
+    # BEGIN replace
+    def _replace(self, task: Task, idx: int = 0):
+        self._internal_list[idx] = task
+    
+    def replace(self, name: str, duration: int, idx: int = 0):
+        self._replace(Task(name, duration), idx)
+    # END replace
+
     def __len__(self):
         return len(self._internal_list)
     
@@ -87,6 +100,15 @@ def main():
     print(str(tl))
     input()
     tl.insert_splice("Task 3", 60, 1)
+    print(str(tl))
+    input()
+    tl.append("Task 4", 60)
+    print(str(tl))
+    input()
+    tl.remove(4)
+    print(str(tl))
+    input()
+    tl.replace("New Task 2", 60, 1)
     print(str(tl))
     input()
 if __name__ == "__main__":
