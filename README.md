@@ -7,7 +7,7 @@ And now, I introduce: **Taskily**
 ### Features
 Look at the source code!
 ```yaml
-Usage: cli.py [OPTIONS] COMMAND [ARGS]...
+Usage: taskily [OPTIONS] COMMAND [ARGS]...
 
 Options:
   --help  Show this message and exit.
