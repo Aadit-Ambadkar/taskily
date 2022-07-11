@@ -31,18 +31,18 @@ def _finish(tl) -> None:
 def main():
     pass
 
-@main.command('list')
+@main.command('list', help='Display the Task List')
 def list():
     _finish(_get_list())
 
-@main.command('init')
+@main.command('init', help='Create a new Task List for Today')
 @click.option('--start_hour', '-sh', type=int, help='Starting Hour', default=7)
 @click.option('--start_minute', '-sm', type=int, help='Starting Hour', default=0)
 def init(start_hour, start_minute):
     _finish(TaskList(datetime(1, 1, 1, start_hour, start_minute)))
 
 
-@main.command('append')
+@main.command('append', help='Add to the end of the Task List')
 @click.option('--name', '-n', required=True, type=str, help='Name of the Task')
 @click.option('--duration', '-d', required=True, type=int, help='Duration of Task, in Minutes')
 def append(name, duration):
@@ -50,7 +50,7 @@ def append(name, duration):
     tl.append(name, duration)
     _finish(tl)
 
-@main.command('insert')
+@main.command('insert', help='Insert at an index of the Task List')
 @click.option('--name', '-n', required=True, type=str, help='Name of the Task')
 @click.option('--duration', '-d', required=True, type=int, help='Duration of Task, in Minutes')
 @click.option('--index', '-i', type=int, help='Index to Insert At', default=1)
@@ -59,7 +59,7 @@ def append(name, duration, index):
     tl.insert(name, duration, index-1)
     _finish(tl)
 
-@main.command('sinsert')
+@main.command('sinsert', help='Split a Task and Insert inbetween the Task at an index of the Task List.')
 @click.option('--name', '-n', required=True, type=str, help='Name of the Task')
 @click.option('--duration', '-d', required=True, type=int, help='Duration of Task, in Minutes')
 @click.option('--time', '-t', required=True, type=int, help='Time to Split Task at, in Minutes')
@@ -69,14 +69,14 @@ def append(name, duration, time, index):
     tl.insert_splice(name, duration, time, index-1)
     _finish(tl)
 
-@main.command('remove')
+@main.command('remove', help='Remove a Task (at an index) from the Task List')
 @click.option('--index', '-i', required=True, type=int, help='Index to Remove')
 def append(index):
     tl = _get_list()
     tl.remove(index-1)
     _finish(tl)
 
-@main.command('replace')
+@main.command('replace', help='Replace one Task with another')
 @click.option('--name', '-n', required=True, type=str, help='Name of the Task')
 @click.option('--duration', '-d', required=True, type=int, help='Duration of Task, in Minutes')
 @click.option('--index', '-i', type=int, help='Index to Replace At', default=1)
