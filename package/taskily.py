@@ -85,7 +85,7 @@ class TaskList:
         
         for task in self._internal_list:
             td = datetime.timedelta(minutes = task.duration)
-            t.add_row([task.name, ct.strftime('%H:%M'), (td+ct).strftime('%H:%M')])
+            t.add_row([task.name, ct.strftime('%I:%M %p'), (td+ct).strftime('%I:%M %p')])
             ct += td
         
         return str(t)
